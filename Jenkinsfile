@@ -37,4 +37,21 @@ pipeline {
             }
         }
     }
+	post {
+        success {
+            echo 'Build and deployment completed successfully!'
+            
+            mail to: 'noushadhasan3395@gmail.com', subject: 'Build Success', body: "Todo-app build was successful!"
+        }
+        failure {
+            echo 'Build or deployment failed.'
+           
+            mail to: 'noushadhasan3395@gmail.com', subject: 'Build Failed', body: "Todo-app build failed."
+        }
+        always {
+            echo 'Clean Up the workspace.'
+            
+            cleanWs()  // Cleans up the workspace
+        }
+    }
 }
