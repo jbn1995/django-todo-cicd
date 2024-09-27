@@ -11,7 +11,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t jabin95/django-todo:02 .'
+                    sh 'sudo docker build -t jabin95/django-todo:02 .'
                 }
             }
         }
@@ -19,9 +19,9 @@ pipeline {
             steps{
                 script{
                    withCredentials([usernamePassword(credentialsId: 'dockerID', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh 'docker login -u $USERNAME -p $PASSWORD'
+                        sh 'sudo docker login -u $USERNAME -p $PASSWORD'
                     }
-                    sh 'docker push jabin95/django-todo:02'
+                    sh 'sudo docker push jabin95/django-todo:02'
                 }
             }
         }
